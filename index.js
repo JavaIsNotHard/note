@@ -72,7 +72,7 @@ app.put('/api/notes/:id', (request, response) => {
     response.json(notes[index]);
 })
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 })
