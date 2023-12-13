@@ -4,6 +4,7 @@ const cors = require('cors');
 
 app.use(cors());
 app.use(express.json()); // json-parser middleware
+app.use(express.static('dist'));
 
 let notes = [
   {
@@ -30,6 +31,11 @@ app.get('/api/notes', (request, response) => {
 app.get('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id);
     const note = notes.find(note => note.id === id);
+    if (!note) {
+	response.status(404).json({
+	    error: "Couldn't find note with the requested id",
+	})
+    }
     response.json(note);
 })
 
